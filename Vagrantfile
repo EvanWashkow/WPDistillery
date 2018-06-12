@@ -20,6 +20,9 @@ Vagrant.configure("2") do |config|
       inline: "echo \"Converting Files for Windows\" && sudo apt-get install -y dos2unix && cd /var/www/ && dos2unix wpdistillery/config.yml && dos2unix wpdistillery/provision.sh && dos2unix wpdistillery/wpdistillery.sh",
       run: "always", privileged: false
     end
+    
+    # Provision new machine: install another PHP version
+    config.vm.provision "shell", path: "provision.sh"
 
     # Run Provisioning – executed within the first `vagrant up` and every `vagrant provision`
     config.vm.provision "shell", path: "wpdistillery/provision.sh"
